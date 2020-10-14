@@ -1,0 +1,29 @@
+{% extends '../base.html' %}
+
+
+{% load static %}
+
+{% block title_block %}
+    Restricted Page
+{% endblock %}
+
+{% block body_block %}
+    <div class="jumbotron">
+        <div class=”container”>
+            <h1 class=”jumbotron-heading”>♠♠♠ Rango Restricted Page ♠♠♠</h1>
+
+            <div>
+                <h2 class="h2">
+
+                    {% if user.is_authenticated %}
+
+                        <p>You are a worthy {{ user.username }}!</p>
+
+                    {% endif %}
+                </h2>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

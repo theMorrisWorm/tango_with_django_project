@@ -1,0 +1,70 @@
+{% extends '../base.html' %}
+
+{% load static %}
+
+{% block title_block %}
+    {{ category.name }}
+
+{% endblock %}
+
+
+{% block body_block %}
+    <div class="jumbotron">
+        <div class=”container”>
+
+
+            {% if category %}
+                <h1 class=”jumbotron-heading”>{{ category.name }}</h1>
+
+                {# ADDING LIKE BUTTON AND LIKE COUNTER#}
+                <div>
+
+                    <strong id="like_count">{{ category.likes }}</strong> people like this category.
+                    {% if user.is_authenticated %}
+                        <button id="likes" data-catid="{{ category.id }}"
+                                class="btn btn-warning btn-sm" type="button">
+                            <span data-feather="thumbs-up"></span>
+                            Like
+                        </button>
+                    {% endif %}
+
+                </div>
+
+
+                {% if pages %}
+                    <ul>
+                        {% for page in pages %}
+                            <li class="list-group-item">
+
+
+                                <a href="{% url 'rango:goto' %}?page_id={{ page.id }}">{{ page.title }}</a>
+
+                                {% if page.views > 1 %}
+                                    ({{ page.views }} views)
+                                {% elif page.views == 1 %}
+                                    ({{ page.views }} view)
+                                {% endif %}
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <strong>No pages currently in category.</strong>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'rango:add_page' category.slug %}">Add Page</a> <br/>
+                {% endif %}
+            {% else %}
+                <b><u>The specified category does not exist!</u></b>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+
+<!-- OLD CATEGORY BODY
+
+
+
+--->

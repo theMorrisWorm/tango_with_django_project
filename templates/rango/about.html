@@ -1,0 +1,52 @@
+{% extends '../base.html' %}
+
+{% load static %}
+
+{% block title_block %}
+    About
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="jumbotron">
+
+        <div class=”container”>
+
+            <h1 class=”jumbotron-heading”>Rango say's…</h1>
+            <div>
+                <h2 class="h2">
+                    <br/>
+                    This tutorial has been put together by <strong> {{ myname }}.</strong>
+                </h2>
+                <strong>Number of Visits: {{ visits }}</strong>
+            </div>
+
+
+            </br>
+            <div>
+                <button class="btn btn-primary"
+                        onClick="alert('You clicked the button using inline JavaScript.');">
+                    Click Me - I run JavaScript
+                </button>
+
+                <button class="btn btn-primary" id="about-btn">
+                    Click Me - I'm JavaScript on Ice
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="spinner-border text-primary" role="status">
+    <p class=".bg-(light)">Testing hover function in rango-jquery file.</p>
+ </div>
+
+
+
+    <div>
+
+        <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" width="500" height="500"/>
+
+        <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a cat"/>
+    </div>
+
+{% endblock %}

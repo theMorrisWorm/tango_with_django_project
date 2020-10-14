@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<!-- templates/rango/base.html -->
+{%  load rango_template_tags %}  <!-- NEW TEMPLATE -->
+{%  load static %}
+
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+<style>
+    .nav {
+          background-color: lightgreen;
+          list-style-type: none;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+    }
+
+    .nav li {
+          display: inline-block;
+          font-size: 20px;
+          padding: 20px;
+    }
+</style>
+
+	<title> Rango
+        {% block title_block %}
+
+        {% endblock %}
+    </title>
+
+</head>
+
+<body>
+
+    <div>
+        {% block body_block %}
+            <p>This is body_block's default content.</p>
+        {% endblock %}
+    </div>
+    <hr/>
+
+    <div>
+        <ul class="nav">
+
+            {% if user.is_authenticated %}
+                <!-- Show these links when the user is logged in -->
+                <li><a href="{% url 'rango:restricted' %}">Restricted Page</a></li>
+                <li><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
+                <li><a href="{% url 'rango:add_category' %}">Add New Category</a></li>
+                <li><a href="{% url 'auth_password_change' %}">Change Password</a></li>
+{#                <li><a href="{% url 'auth_password_change_done' %}">Change dddd</a></li>#}
+
+            {% else %}
+                <!-- Show these links when the user is NOT logged in -->
+                <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+                <li><a href="{% url 'auth_login' %}">Login</a></li>
+            {% endif %}
+                <!-- Outside the conditional statements, ALWAYS show -->
+                <li><a href="{% url 'rango:about' %}">About</a></li>
+                <li><a href="{% url 'rango:index' %}">Index</a></li>
+
+        </ul>
+    </div>
+
+
+    <hr/>
+    <div> <!-- NEW TEMPLATE -->
+        {% block sidebar_block %}
+            {% get_category_list category %}
+        {% endblock %}
+    </div> <!-- NEW TEMPLATE -->
+
+</body>
+
+</html>
